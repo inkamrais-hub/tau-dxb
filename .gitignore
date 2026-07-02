@@ -13,8 +13,11 @@ remote/
 *.mp3
 
 # 模型权重（git LFS 或单独下载）
-model.pt
+**/outputs/**/model.pt
 *.safetensors
+
+# model_zoo/ 下的权重用 Git LFS 追踪
+!model_zoo/**/model.pt
 
 # 环境
 .env

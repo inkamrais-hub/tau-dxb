@@ -192,8 +192,12 @@ dV_j = Σ_i P_ij · dO_i
 ## 使用方式
 
 ```bash
-# 推理
-python predict.py --input_dir ./test_audio --model model.pt --output result.jsonl
+# ERP3 推理（τ-opus 权重）
+python predict.py --input_dir ./test_audio --model model_zoo/erp3/model.pt \
+    --tau_opus --tau_init model_zoo/erp3/tau_star.json --output result.jsonl
+
+# ERP1 推理（标准权重）
+python predict.py --input_dir ./test_audio --model model_zoo/erp1/model.pt --output result.jsonl
 
 # 评估
 python evaluator.py result.jsonl verify.csv ./report
@@ -213,7 +217,10 @@ python evaluator.py result.jsonl verify.csv ./report
 
 ```
 ├── predict.py                   # 推理脚本
-├── model.pt                     # 微调权重
+├── model_zoo/
+│   └── erp3/                    # 微调权重（Git LFS）
+│       ├── model.pt             # ERP3 epoch5 462MB checkpoint
+│       └── tau_star.json        # per-head τ* 初始化值
 ├── requirements.txt             # 依赖
 ├── scripts/
 │   ├── train_erp1.py            # ERP1 训练脚本
