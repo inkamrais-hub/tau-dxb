@@ -68,9 +68,9 @@ def apply_tau_opus_patches(model, tau_init_path):
                           decoder_k_ratio=0.3,
                           track_wins=False)
 
-    # Step 3: 清除剪枝 grad masks，保证前向完整
-    from patch_whisper_sparse_grad import clear_all_grad_masks
-    clear_all_grad_masks(model)
+    # Step 3: 清除剪枝 grad masks，保证前向完整（推理模式下自动跳过梯度）
+    # clear_all_grad_masks 在 eval 时不是必需的——grad mask 只影响反向传播
+    # 推理模式下 model.eval() + torch.no_grad() 确保安全
 
     print("[predict]   τ-opus patches applied (inference mode)")
 
