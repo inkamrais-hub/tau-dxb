@@ -1,0 +1,7 @@
+torch>=2.0.0
+transformers>=4.30.0
+soundfile>=0.12.0
+librosa>=0.9.0
+jiwer>=3.0.0
+datasets>=2.10.0
+accelerate>=0.20.0
